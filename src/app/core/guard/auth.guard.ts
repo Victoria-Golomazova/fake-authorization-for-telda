@@ -17,14 +17,14 @@ export class AuthGuard implements CanActivate {
     private _authService: AuthService,
     private _storageService: StorageService,
     private _router: Router,
-  ) {}
+  ) { }
 
   public canActivate(): boolean {
     if (!this._authService.isLoggedIn(this.allUsers, this.currentUser)) {
       this._router.navigateByUrl('auth');
     }
-    
+
     return this._authService.isLoggedIn(this.allUsers, this.currentUser)
-    
+
   }
 }

@@ -1,0 +1,35 @@
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__hello {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  &__goodbye {
+    button {
+      background: rgb(186, 249, 228);
+      border-radius: 5px;
+      padding: 10px 30px;
+    }
+  }
+}
+
+.users {
+  margin-top: 3rem;
+
+  .user {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #000;
+
+    span {
+      margin-right: 10px;
+      font-weight: 700;
+    }
+  }
+}

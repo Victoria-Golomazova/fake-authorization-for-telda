@@ -1,1 +1,17 @@
-<p>home works!</p>
+<header class="head">
+  <div class="head__hello">
+    Привет, {{currentUser.login}}!
+  </div>
+  <div class="head__goodbye">
+    <button (click)="logout()">Выйти</button>
+  </div>
+</header>
+
+<section class="users">
+  <h3>Все пользователи:</h3>
+
+  <div class="user" *ngFor="let user of allUsers; let i = index">
+    <span>{{i + 1}}.</span>
+    <p>{{user.login}}</p>
+  </div>
+</section>
