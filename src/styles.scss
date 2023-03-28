@@ -12,10 +12,40 @@ body {
   color: #000;
 }
 
+button, input {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  line-height: 1.4;
+  background: #fff;
+  color: #000;
+  padding: .6rem;
+  margin: 10px 0;
+}
+button {
+  border: none;
+  cursor: pointer;
+  transition: .2s ease-in-out;
+  &:hover {
+    background: rgb(209, 209, 209);
+  }
+}
+input {
+  border: none;
+  border-bottom: 2px solid #000;
+}
+
 a {
   text-decoration: none;
 }
 
 ul {
   list-style: none;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0.2rem;
+  height: 100vh;
 }

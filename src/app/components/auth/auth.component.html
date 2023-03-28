@@ -1,1 +1,27 @@
-<p>auth works!</p>
+<main>
+  <section class="tabs">
+    <div class="tabs__auth">
+      <button 
+        [class.active]="typePage === 'register'"
+        (click)="toggleType('register')"
+      >Зарегестрироваться</button>
+    </div>
+    <div class="tabs__login">
+      <button 
+        [class.active]="typePage === 'auth'"
+        (click)="toggleType('auth')"
+      >Войти</button>
+    </div>
+  </section>
+
+
+  <form>
+    <div class="form__name">
+      <input type="text" placeholder="Логин">
+    </div>
+    <div class="form__password">
+      <input type="password" placeholder="Пароль">
+    </div>
+    <button  class="form__btn">{{typePage ==='register' ? 'Зарегестрироваться' : 'Войти'}}</button>
+  </form>
+</main>
