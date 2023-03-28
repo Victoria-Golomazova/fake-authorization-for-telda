@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { AllUsers, PageTypes, User } from 'src/app/utils/types';
 
@@ -19,11 +21,15 @@ export class AuthComponent implements OnInit {
     password: [null, [Validators.required]],
   })
 
-  public allUsers: AllUsers = this._storage.getItem<AllUsers>('users') || [];
+  public allUsers: AllUsers = this._storageService.getItem<AllUsers>('users') || [];
+
+  public currentUser: User = this._storageService.getItem<User>('user');
 
   constructor(
     private _fb: FormBuilder,
-    private _storage: StorageService,
+    private _storageService: StorageService,
+    private _authService: AuthService,
+    private _router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -38,21 +44,23 @@ export class AuthComponent implements OnInit {
     return this.isVisiblePass = !this.isVisiblePass;
   }
 
-  private verifiedName(dataArray: AllUsers, newElem: User): boolean {
-    return Boolean(dataArray.find((el) => el.login === newElem.login))
-  }
-
   public register(user: User): void {
-    if (!this.verifiedName(this.allUsers, user)) {
+    if (!this._authService.verificationLogin(this.allUsers, user)) {
       this.allUsers.push(user)
-      this._storage.setItem('users', this.allUsers)
+      this._storageService.setItem('users', this.allUsers)
     } else {
       throw new Error('Пользователь с таким именем уже существует')
     }
   }
 
-  public login() {
+  public login(user: User): void {
+    this._storageService.setItem('user', user)
 
+    if (this._authService.isLoggedIn(this.allUsers, user)) {
+      this._router.navigateByUrl('home');
+    } else {
+      throw new Error('Такого пользователя не существует или неправильно введен логин/пароль')
+    }
   }
 
 }

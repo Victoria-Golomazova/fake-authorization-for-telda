@@ -24,7 +24,7 @@
       <p (click)="togglePass()">{{ isVisiblePass ? 'Скрыть пароль' : 'Показать пароль' }}</p>
     </div>
     <button class="form__btn"
-      (click)="typePage ==='register' ? register(user.value) : login()"
+      (click)="typePage ==='register' ? register(user.value) : login(user.value)"
     >
       {{typePage ==='register' ? 'Зарегестрироваться' : 'Войти'}}
     </button>
