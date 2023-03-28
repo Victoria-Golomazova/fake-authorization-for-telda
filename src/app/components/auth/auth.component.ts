@@ -21,9 +21,9 @@ export class AuthComponent implements OnInit {
     password: [null, [Validators.required]],
   })
 
-  public allUsers: AllUsers = this._storageService.getItem<AllUsers>('users') || [];
+  public allUsers!: AllUsers;
 
-  public currentUser: User = this._storageService.getItem<User>('user');
+  public currentUser!: User;
 
   constructor(
     private _fb: FormBuilder,
@@ -34,6 +34,8 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     this.typePage = 'register';
+    this.allUsers = this._storageService.getItem<AllUsers>('users') || [];
+    this.currentUser = this._storageService.getItem<User>('user');
   }
 
   public toggleType(type: PageTypes): PageTypes {

@@ -9,15 +9,17 @@ import { AllUsers, User } from "../utils/types";
 })
 export class AuthGuard implements CanActivate {
 
-  public allUsers: AllUsers = this._storageService.getItem<AllUsers>('users') || [];
-
-  public currentUser: User = this._storageService.getItem<User>('user');
+  public allUsers: AllUsers;
+  public currentUser: User;
 
   constructor(
     private _authService: AuthService,
     private _storageService: StorageService,
     private _router: Router,
-  ) { }
+  ) {
+    this.allUsers = this._storageService.getItem<AllUsers>('users');
+    this.currentUser = this._storageService.getItem<User>('user');
+   }
 
   public canActivate(): boolean {
     if (!this._authService.isLoggedIn(this.allUsers, this.currentUser)) {
